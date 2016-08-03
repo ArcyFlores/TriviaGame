@@ -148,7 +148,7 @@ function game (){
     timer = 10;
     $('#timer').html('Timer: ' + timer);
     i ++;
-    if (i > characters.length) {
+    if (i >= characters.length) {
     $('#question').html("Congratulations! You made it to the end!");
     $('.clue').html('<img src='+ imageDir + 'fireworks.gif' + ' width="500px">');
     $('#timer').html('Correct Guesses : ' + numCorrect + "  | |  Wrong Guesses: " + numWrong);
