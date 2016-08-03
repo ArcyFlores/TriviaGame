@@ -115,11 +115,12 @@ function displayImage (){
     $('#button4').text(characters[i].button4);
     //turn off start button
     $("#startGame").off();    
-    game();
 }
 
+game();
+
 function game (){
-  $('#button1,#button2,#button3,#button4').on('click', function(){
+  $('#button1, #button2, #button3, #button4').on('click', function(){
     var guess = $(this).text();
     console.log(guess);
     if (guess == characters[i].answer) {
@@ -151,6 +152,7 @@ function game (){
     $('#question').html("Congratulations! You made it to the end!");
     $('.clue').html('<img src='+ imageDir + 'fireworks.gif' + ' width="500px">');
     $('#timer').html('Correct Guesses : ' + numCorrect + "  | |  Wrong Guesses: " + numWrong);
+    $('.selection').empty();
     }
     else {displayImage();}
   }
