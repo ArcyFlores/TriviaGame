@@ -87,7 +87,7 @@ scar = {
   answer:'Scar'
 }, 
 vanessa = {
-  question: "The evil sea witch turned human in an attempt to ruin Ariel's happiness",
+  question:"The evil sea witch turned human in an attempt to ruin Ariel's happiness",
   image: 'vanessa.png',
   button1:'Jennifer',
   button2:'Ursula',
@@ -100,7 +100,6 @@ vanessa = {
 var timer = 10;
 var questionCounter;
 var i = 0;
-var userGuesses =[]; 
 var numCorrect = 0;
 var numWrong = 0;
 $("#startGame").click(displayImage);
@@ -120,7 +119,7 @@ function displayImage (){
 }
 
 function game (){
-  $('.btn-default').on('click', function(){
+  $('#button1,#button2,#button3,#button4').on('click', function(){
     var guess = $(this).text();
     console.log(guess);
     if (guess == characters[i].answer) {
@@ -128,12 +127,11 @@ function game (){
       numCorrect ++;
       stop();
     } else {
-      alert ("Wrong, try again!");
+      alert ("Sorry, that was wrong!");
       numWrong ++;
     }
   });
 }
-
 
   function decrement(){
       timer--;
@@ -149,6 +147,11 @@ function game (){
     timer = 10;
     $('#timer').html('Timer: ' + timer);
     i ++;
-    displayImage();
+    if (i > characters.length) {
+    $('#question').html("Congratulations! You made it to the end!");
+    $('.clue').html('<img src='+ imageDir + 'fireworks.gif' + ' width="500px">');
+    $('#timer').html('Correct Guesses : ' + numCorrect + "  | |  Wrong Guesses: " + numWrong);
+    }
+    else {displayImage();}
   }
 
