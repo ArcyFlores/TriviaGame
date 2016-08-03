@@ -100,8 +100,11 @@ vanessa = {
 var timer = 10;
 var questionCounter;
 var i = 0;
+var userGuesses =[]; 
+var numCorrect = 0;
+var numWrong = 0;
 $("#startGame").click(displayImage);
-
+//display images after start game is clicked
 function displayImage (){
   counter = setInterval(decrement, 1000);
     $('#timer').html('Timer: ' + timer);
@@ -111,42 +114,26 @@ function displayImage (){
     $('#button2').text(characters[i].button2);
     $('#button3').text(characters[i].button3);
     $('#button4').text(characters[i].button4);
+    //turn off start button
+    $("#startGame").off();    
     game();
-
 }
 
 function game (){
-  $('#button1').on('click',compareInput);
-  $('#button2').on('click',compareInput);
-  $('#button3').on('click',compareInput);
-  $('#button4').on('click',compareInput);
+  $('.btn-default').on('click', function(){
+    var guess = $(this).text();
+    console.log(guess);
+    if (guess == characters[i].answer) {
+      alert('Correct!');
+      numCorrect ++;
+      stop();
+    } else {
+      alert ("Wrong, try again!");
+      numWrong ++;
+    }
+  });
 }
 
-function compareInput () {
-  if (characters[i].button1 == characters[i].answer || characters[i].button2 == characters[i].answer || characters[i].button3 == characters[i].answer || characters[i].button4 == characters[i].answer ) {
-    alert('Correct!');
-  } else {
-    alert ("Wrong, try again!");
-  }
-}
-// var nextQuestion = function(){
-//     i++
-//     $('#question').html(characters[i].question);
-//     $('.clue').html('<img src='+ imageDir + characters[i].image + ' width="500px">');
-//     $('#button1').text(characters[i].button1);
-//     $('#button2').text(characters[i].button2);
-//     $('#button3').text(characters[i].button3);
-//     $('#button4').text(characters[i].button4);
-//   }
-
- // for (var i=0; i < characters.length; i++){
- //    $('#question').html(characters[i].question);
- //    $('.clue').html('<img src='+ imageDir + characters[i].image + ' width="500px">');
- //    $('#button1').text(characters[i].button1);
- //    $('#button2').text(characters[i].button2);
- //    $('#button3').text(characters[i].button3);
- //    $('#button4').text(characters[i].button4);
- //  }
 
   function decrement(){
       timer--;
