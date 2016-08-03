@@ -99,10 +99,11 @@ vanessa = {
 
 var timer = 10;
 var questionCounter;
+var i = 0;
 $("#startGame").click(displayImage);
 
 function displayImage (){
-    var i = 0;
+  counter = setInterval(decrement, 1000);
     $('#timer').html('Timer: ' + timer);
     $('#question').html(characters[i].question);
     $('.clue').html('<img src='+ imageDir + characters[i].image + ' width="500px">');
@@ -115,19 +116,28 @@ function displayImage (){
 }
 
 function game (){
-  nextQuestion();
-  $('#button1').on('click',function(){});
-  $('#button2').on('click',function(){});
-  $('#button3').on('click',function(){});
-  $('#button4').on('click',function(){});
+  $('#button1').on('click',compareInput);
+  $('#button2').on('click',compareInput);
+  $('#button3').on('click',compareInput);
+  $('#button4').on('click',compareInput);
 }
 
 function compareInput () {
-  // if (characters[i].button1 == characters[i].answer || characters[i].button2 == characters[i].answer) || 
-}
-var nextQuestion = function(){
-    counter = setInterval(decrement, 1000);
+  if (characters[i].button1 == characters[i].answer || characters[i].button2 == characters[i].answer || characters[i].button3 == characters[i].answer || characters[i].button4 == characters[i].answer ) {
+    alert('Correct!');
+  } else {
+    alert ("Wrong, try again!");
   }
+}
+// var nextQuestion = function(){
+//     i++
+//     $('#question').html(characters[i].question);
+//     $('.clue').html('<img src='+ imageDir + characters[i].image + ' width="500px">');
+//     $('#button1').text(characters[i].button1);
+//     $('#button2').text(characters[i].button2);
+//     $('#button3').text(characters[i].button3);
+//     $('#button4').text(characters[i].button4);
+//   }
 
  // for (var i=0; i < characters.length; i++){
  //    $('#question').html(characters[i].question);
@@ -142,14 +152,16 @@ var nextQuestion = function(){
       timer--;
       $('#timer').html('Timer: ' + timer);    
       if (timer === 0){  
+      alert('Time Up!');
       stop();
-      alert('Time Up!')
       }
   }
 
   function stop (){
     clearInterval(counter);
     timer = 10;
-    nextQuestion();
+    $('#timer').html('Timer: ' + timer);
+    i ++;
+    displayImage();
   }
 
